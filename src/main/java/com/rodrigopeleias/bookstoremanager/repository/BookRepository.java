@@ -6,6 +6,7 @@ package com.rodrigopeleias.bookstoremanager.repository;
  * @since Release 01 da aplicação
  */
 
+import com.rodrigopeleias.bookstoremanager.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {                 //informa entidade e o tipo de dado do id
