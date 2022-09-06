@@ -9,6 +9,7 @@ package com.rodrigopeleias.bookstoremanager.controller;
 import com.rodrigopeleias.bookstoremanager.dto.BookDTO;
 import com.rodrigopeleias.bookstoremanager.dto.MessageResponseDTO;
 import com.rodrigopeleias.bookstoremanager.entity.Book;
+import com.rodrigopeleias.bookstoremanager.exception.BookNotFoundException;
 import com.rodrigopeleias.bookstoremanager.repository.BookRepository;
 import com.rodrigopeleias.bookstoremanager.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public BookDTO findById(@PathVariable Long id){
+    public BookDTO findById(@PathVariable Long id) throws BookNotFoundException {
         return bookService.findById(id);
     }
 }

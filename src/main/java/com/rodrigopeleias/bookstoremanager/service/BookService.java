@@ -1,5 +1,6 @@
 package com.rodrigopeleias.bookstoremanager.service;
 
+import com.rodrigopeleias.bookstoremanager.exception.BookNotFoundException;
 import com.rodrigopeleias.bookstoremanager.dto.BookDTO;
 import com.rodrigopeleias.bookstoremanager.dto.MessageResponseDTO;
 import com.rodrigopeleias.bookstoremanager.entity.Book;
@@ -42,8 +43,13 @@ public class BookService {
                 .build();
     }
 
-        public BookDTO findById(Long id) {
-            Optional<Book> optionalBook = bookRepository.findById(id);  //optional, se passarmos um livro que existe ou nao no sistema
-            return bookMapper.toDTO(optionalBook.get());
+        public BookDTO findById(Long id) throws BookNotFoundException {
+            //codigo otimizado abaixo
+            //Optional<Book> optionalBook = bookRepository.findById(id);  //optional, se passarmos um livro que existe ou nao no sistema
+            //return bookMapper.toDTO(optionalBook.get());
+            
+            //se o livro nao for encontrado, na lambda chama um Exception
+            Book book = bookRepository.findById(id).orElseThrow( () -> new BookNotFoundException(id));
+            return bookMapper.toDTO(book);
         }
 }
