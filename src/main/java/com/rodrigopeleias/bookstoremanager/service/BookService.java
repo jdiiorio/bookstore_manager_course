@@ -8,7 +8,9 @@ import com.rodrigopeleias.bookstoremanager.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-                                    //onde ficam as regras de negocio, quem conhece de fato a criacao do livro
+import java.util.Optional;
+
+//onde ficam as regras de negocio, quem conhece de fato a criacao do livro
 @Service                            //essa classe sera gerenciada pelo Spring e pode ter controle transacional
 public class BookService {
 
@@ -39,4 +41,9 @@ public class BookService {
                 .message("Book created with id " + savedBook.getId())
                 .build();
     }
+
+        public BookDTO findById(Long id) {
+            Optional<Book> optionalBook = bookRepository.findById(id);  //optional, se passarmos um livro que existe ou nao no sistema
+            return bookMapper.toDTO(optionalBook.get());
+        }
 }
