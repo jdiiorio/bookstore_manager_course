@@ -6,6 +6,7 @@ package com.rodrigopeleias.bookstoremanager.controller;
  * @since Release 01 da aplicação
  */
 
+import com.rodrigopeleias.bookstoremanager.dto.BookDTO;
 import com.rodrigopeleias.bookstoremanager.dto.MessageResponseDTO;
 import com.rodrigopeleias.bookstoremanager.entity.Book;
 import com.rodrigopeleias.bookstoremanager.repository.BookRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController                                                       //para o Spring essa classe vai representar um controller, sera uma api rest
 @RequestMapping("/api/v1/books")                                      //indica o endereço da aplicação, endpoint
@@ -28,7 +31,7 @@ public class BookController {
     }
 
     @PostMapping                        //operacao do tipo POST
-    public MessageResponseDTO create(@RequestBody Book book) {       //criando o metodo que cadastra o livro e devolve um objeto de transferencia de dados
-       return bookService.create(book);                             //delegando para o service criar o livro, sera de responsabilidade dela
+    public MessageResponseDTO create(@RequestBody @Valid BookDTO bookDTO) {       //criando o metodo que cadastra o livro e devolve um objeto de transferencia de dados
+       return bookService.create(bookDTO);                             //delegando para o service criar o livro, sera de responsabilidade dela
     }
 }
