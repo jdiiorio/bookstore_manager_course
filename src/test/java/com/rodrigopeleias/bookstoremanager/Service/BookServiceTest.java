@@ -24,4 +24,8 @@ public class BookServiceTest {
     }
 
 
+    @Test
+    void whenGiveUnexistingIdThenNotFoundThrowAnException(){
+        //trabalhar aqui
+    }
 }
