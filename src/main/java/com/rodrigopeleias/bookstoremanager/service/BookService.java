@@ -52,4 +52,12 @@ public class BookService {
             Book book = bookRepository.findById(id).orElseThrow( () -> new BookNotFoundException(id));
             return bookMapper.toDTO(book);
         }
+
+        public MessageResponseDTO delete(Long id){
+            bookRepository.deleteById(id);
+
+            return MessageResponseDTO.builder()
+                    .message("Book deleted with id " + id)
+                    .build();
+        }
 }
